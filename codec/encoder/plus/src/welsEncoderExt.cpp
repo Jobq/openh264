@@ -181,6 +181,10 @@ int CWelsH264SVCEncoder::GetDefaultParams (SEncParamExt* argv) {
 /*
  * On-the-fly param changes for SVC Encoder
  */
+void CWelsH264SVCEncoder::OnTheFlyBitrateModif (int bitrate){
+	m_pEncContext->pSvcParam->sSpatialLayers[0].iSpatialBitrate = bitrate;
+}
+
  void CWelsH264SVCEncoder::OnTheFlyParamModifUP (){
 
 	m_pEncContext->pSvcParam->sSpatialLayers[0].iSpatialBitrate *= 4;
@@ -191,16 +195,10 @@ int CWelsH264SVCEncoder::GetDefaultParams (SEncParamExt* argv) {
 void CWelsH264SVCEncoder::OnTheFlyParamModifDOWN (){
 
 	m_pEncContext->pSvcParam->sSpatialLayers[0].iSpatialBitrate *= 0.25;
-	//m_pEncContext->pSvcParam->iTargetBitrate *= 0.5;
+	//m_pEncContext->pSvcsParam->iTargetBitrate *= 0.5;
 	//m_pEncContext->pSvcParam->iMaxBitrate *= 0.5;
 
-<<<<<<< HEAD
 }
-=======
-	m_pEncContext->pSvcParam->sSpatialLayers[0].iSpatialBitrate *= 0.25;
-	m_pEncContext->pSvcParam->iTargetBitrate *= 0.25;
-	m_pEncContext->pSvcParam->iMaxBitrate *= 0.25;
->>>>>>> master
 
 void CWelsH264SVCEncoder::print(){
 	printf("Bitrate iSpatialBitrate is %d\n", m_pEncContext->pSvcParam->sSpatialLayers[0].iSpatialBitrate);
